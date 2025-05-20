@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 13:35:30 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 14:18:59 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/20 15:21:40 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	philo_init(t_philo *philo, int ac, char **av)
 	int	*dead_alive;
 
 	i = 0;
-	dead_alive =  malloc(sizeof(int))
+	dead_alive =  malloc(sizeof(int));
 	while (i <= atol(av[1]))
 	{
 		philo[i].id = i;
@@ -28,10 +28,32 @@ void	philo_init(t_philo *philo, int ac, char **av)
 		philo[i].eat = atol(av[3]);
 		philo[i].sleep = atol(av[4]);
 		if (ac == 6)
-			philo[i].need_food = atol(av[5])
+			philo[i].need_food = atol(av[5]);
 		else
 			philo[i].need_food = -1; // come de forma infinita
-		philo[i].start = get_time();
-		philo[i].last = get_time();
+		philo[i].start = ft_get_time();
+		philo[i].last = ft_get_time();
+		i++;
 	}
+}
+
+void	mutex_init(t_philo *philo, pthread_mutex_t *cutlery, pthread_mutex_t *death)
+{
+	int	i;
+	
+	i = 0;
+	while (i < philo->num_philo)
+	{
+		philo[i].left_fork = &cutlery[i];
+		philo[i].right_fork = &cutlery[(i + 1) % philo->num_philo];
+		i++;
+	}
+	i = 0;
+	while (i < philo->num_philo)
+	{
+		pthread_mutex_init(philo[i].left_fork, NULL);
+		pthread_mutex_init(philo[i].right_fork, NULL);
+		i++;
+	}
+	pthread_mutex_init(philo->death, NULL);
 }
