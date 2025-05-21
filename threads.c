@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 16:37:51 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:33:51 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	create_threads(t_philo *philo)
 	i = 0;
 	while (i < philo->num_philo)
 	{
-		pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i])
+		pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
 		i++;
 		usleep(30); // aquí pueden ser perfectamente 100 (0.1 ms), esto deja tiempo entre cada creacion de hilos para no sobrecargar el sistema
 	}
@@ -66,16 +66,16 @@ int	is_dead(t_philo *philo)
 	if (philo->have_eaten == philo->need_food)
 		return (1);
 	pthread_mutex_lock(philo->death);
-	if (*(philo->dead_alive) == 1)
+	if (*(philo->dead) == 1)
 	{
 		pthread_mutex_unlock(philo->death);
 		return (1);
 	}
 	if (philo->last - philo->start > philo->die)
 	{
-		*(philo->dead_alive) = 1;
+		*(philo->dead) = 1;
 		philo_print(philo, "philo died", 1);
-		pthread_mutex_unlock(philo->death)
+		pthread_mutex_unlock(philo->death);
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:40 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 14:55:30 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:33:07 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
 	int				num_philo;
 	int				have_eaten;
 	int				need_food;
-	int				*dead_alive;
+	int				*dead;
 	t_time			die;
 	t_time			eat;
 	t_time			sleep;

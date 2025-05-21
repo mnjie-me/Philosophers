@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 15:15:15 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/20 17:33:15 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ int    main(int ac, char **av)
 
 	philo_init(philo, ac, av);
 	mutex_init(philo, cutlery, death);
-	create_threads(philo)
+	create_threads(philo);
 	return (0);
 }
