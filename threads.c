@@ -6,31 +6,31 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 17:33:51 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:01:33 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	create_threads(t_philo *philo)
+int	is_dead(t_philo *philo)
 {
-	int	i;
-
-	i = 0;
-	while (i < philo->num_philo)
+	if (philo->has_eaten == philo->need_food)
+		return (1);
+	pthread_mutex_lock(philo->death);
+	if (*(philo->dead) == 1)
 	{
-		pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
-		i++;
-		usleep(30); // aquí pueden ser perfectamente 100 (0.1 ms), esto deja tiempo entre cada creacion de hilos para no sobrecargar el sistema
+		pthread_mutex_unlock(philo->death);
+		return (1);
 	}
-	if (is_dead(philo))
-		return ;
-	i = 0;
-	while (i < philo->num_philo)
+	if (philo->last - philo->start > philo->time_die)
 	{
-		pthread_join(philo[i].thread, NULL);
-		i++;
+		*(philo->dead) = 1;
+		philo_print(philo, "philo died", 1);
+		pthread_mutex_unlock(philo->death);
+		return (1);
 	}
+	printf("\nestoy aquí 2\n");
+	return (0);
 }
 
 void *philo_routine(void *args)
@@ -53,30 +53,32 @@ void *philo_routine(void *args)
 		{
 			if(is_dead(philo))
 				break;
-			philo_eat(philo);
-			philo_sleep(philo);
-			philo_think(philo);
+			philo_eats(philo);
+			philo_sleeps(philo);
+			philo_thinks(philo);
 		}		
 	}
 	return (NULL);
 }
 
-int	is_dead(t_philo *philo)
+void	create_threads(t_philo *philo)
 {
-	if (philo->have_eaten == philo->need_food)
-		return (1);
-	pthread_mutex_lock(philo->death);
-	if (*(philo->dead) == 1)
+	int	i;
+
+	i = 0;
+	while (i < philo->num_philo)
 	{
-		pthread_mutex_unlock(philo->death);
-		return (1);
+		pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
+		i++;
+		usleep(100); // aquí pueden ser perfectamente 100 (0.1 ms), esto deja tiempo entre cada creacion de hilos para no sobrecargar el sistema
 	}
-	if (philo->last - philo->start > philo->die)
+	printf("\nestoy aquí\n");
+	if (is_dead(philo))
+		return ;
+	i = 0;
+	while (i < philo->num_philo)
 	{
-		*(philo->dead) = 1;
-		philo_print(philo, "philo died", 1);
-		pthread_mutex_unlock(philo->death);
-		return (1);
+		pthread_join(philo[i].thread, NULL);
+		i++;
 	}
-	return (0);
 }

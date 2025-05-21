@@ -6,41 +6,17 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 13:35:30 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/20 17:33:23 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/21 17:56:16 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	philo_init(t_philo *philo, int ac, char **av)
+void	mutex_init(t_philo *philo, pthread_mutex_t *cutlery, \
+		pthread_mutex_t *death)
 {
 	int	i;
-	int	*dead;
 
-	i = 0;
-	dead =  malloc(sizeof(int));
-	while (i <= atol(av[1]))
-	{
-		philo[i].id = i;
-		philo[i].have_eaten = 0;
-		philo[i].dead = dead;
-		philo[i].die = atol(av[2]);
-		philo[i].eat = atol(av[3]);
-		philo[i].sleep = atol(av[4]);
-		if (ac == 6)
-			philo[i].need_food = atol(av[5]);
-		else
-			philo[i].need_food = -1; // come de forma infinita
-		philo[i].start = ft_get_time();
-		philo[i].last = ft_get_time();
-		i++;
-	}
-}
-
-void	mutex_init(t_philo *philo, pthread_mutex_t *cutlery, pthread_mutex_t *death)
-{
-	int	i;
-	
 	i = 0;
 	while (i < philo->num_philo)
 	{
@@ -53,7 +29,35 @@ void	mutex_init(t_philo *philo, pthread_mutex_t *cutlery, pthread_mutex_t *death
 	{
 		pthread_mutex_init(philo[i].left_fork, NULL);
 		pthread_mutex_init(philo[i].right_fork, NULL);
+		philo[i].death = death;
 		i++;
 	}
 	pthread_mutex_init(philo->death, NULL);
+}
+
+void	philo_init(t_philo *philo, int ac, char **av)
+{
+	int	i;
+	int	*dead;
+
+	i = 0;
+	dead =  malloc(sizeof(int));
+	*dead = 0;
+	while (i < atol(av[1]))
+	{
+		philo[i].id = i;
+		philo[i].has_eaten = 0;
+		philo[i].dead = dead;
+		philo[i].num_philo = atol(av[1]);
+		philo[i].time_die = atol(av[2]);
+		philo[i].eat = atol(av[3]);
+		philo[i].sleep = atol(av[4]);
+		if (ac == 6)
+			philo[i].need_food = atol(av[5]);
+		else
+			philo[i].need_food = -1; // come de forma infinita
+		philo[i].start = time_now();
+		philo[i].last = time_now();
+		i++;
+	}
 }
