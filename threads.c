@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/21 18:01:33 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:06:55 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,21 @@
 
 int	is_dead(t_philo *philo)
 {
-	if (philo->has_eaten == philo->need_food)
+	if (philo->need_food != -1 && philo->has_eaten == philo->need_food)
 		return (1);
 	pthread_mutex_lock(philo->death);
-	if (*(philo->dead) == 1)
+	if (*philo->dead)
 	{
 		pthread_mutex_unlock(philo->death);
 		return (1);
 	}
-	if (philo->last - philo->start > philo->time_die)
+	pthread_mutex_unlock(philo->death);
+	if (time_now() - philo->last > philo->time_die)
 	{
 		*(philo->dead) = 1;
-		philo_print(philo, "philo died", 1);
-		pthread_mutex_unlock(philo->death);
+		philo_print(philo, "Philo died\n", 1);
 		return (1);
 	}
-	printf("\nestoy aquí 2\n");
 	return (0);
 }
 
@@ -41,10 +40,9 @@ void *philo_routine(void *args)
 	if (philo->num_philo == 1 && !is_dead(philo))
 	{
 		pthread_mutex_lock(philo->left_fork);
-			return (NULL);
+		philo_print(philo, "\x1B[43m\x1B[30m\x1B[3mis using the fork\x1B[0m\n", 0);
 		while (!is_dead(philo))
 			usleep(100);
-		philo_print(philo, "using left fork", 0);
 		pthread_mutex_unlock(philo->left_fork);
 	}
 	else
@@ -70,9 +68,8 @@ void	create_threads(t_philo *philo)
 	{
 		pthread_create(&philo[i].thread, NULL, &philo_routine, &philo[i]);
 		i++;
-		usleep(100); // aquí pueden ser perfectamente 100 (0.1 ms), esto deja tiempo entre cada creacion de hilos para no sobrecargar el sistema
+		usleep(100);
 	}
-	printf("\nestoy aquí\n");
 	if (is_dead(philo))
 		return ;
 	i = 0;

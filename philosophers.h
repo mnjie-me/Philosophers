@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:40 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/21 17:22:05 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 16:07:53 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	philo_eats(t_philo *philo);
 void	philo_sleeps(t_philo *philo);
 void	philo_thinks(t_philo *philo);
 void	philo_print(t_philo *philo, char *status, int dead);
-int		philo_waits(t_philo *philo, t_time wait_time);
+//int		philo_waits(t_philo *philo, t_time wait_time);
 
 int		is_valid(const char *av);
 long	ft_atol(const char *av);
