@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:43:02 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:16:34 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:23:16 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	philo_waits(t_philo *philo, t_time wait_time)
 {
 	t_time	time;
-	
+
 	time = time_now();
 	while (time_now() - time < wait_time)
 	{
@@ -35,24 +35,24 @@ void	philo_print(t_philo *philo, char *status, int dead)
 		printf("\x1B[3m\x1B[33m%llu\x1B[0m", (time_now() - philo->start));
 		printf("ms Philo %d %s\n", philo->id + 1, status);
 	}
-		
 	if (dead)
 	{
 		*philo->dead = 1;
-		printf("\n\x1B[41m\x1B[37mAt %llums Philo %d died\x1B[0m\n\n\n", (time_now() - philo->start), philo->id + 1);
+		printf("\n\x1B[41m\x1B[37mAt %llums Philo %d died\x1B[0m\n\n\n", \
+		(time_now() - philo->start), philo->id + 1);
 	}
 	pthread_mutex_unlock(philo->death);
-    is_dead(philo);
+	is_dead(philo);
 }
 
-void philo_thinks(t_philo *philo)
+void	philo_thinks(t_philo *philo)
 {
 	if (is_dead(philo))
 		return ;
 	philo_print(philo, "is thinking\n", 0);
 }
 
-void philo_sleeps(t_philo *philo)
+void	philo_sleeps(t_philo *philo)
 {
 	pthread_mutex_unlock(philo->left_fork);
 	pthread_mutex_unlock(philo->right_fork);

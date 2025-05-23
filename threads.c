@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:06:55 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:26:46 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,16 @@ int	is_dead(t_philo *philo)
 	return (0);
 }
 
-void *philo_routine(void *args)
+void	*philo_routine(void *args)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)args;
 	if (philo->num_philo == 1 && !is_dead(philo))
 	{
 		pthread_mutex_lock(philo->left_fork);
-		philo_print(philo, "\x1B[43m\x1B[30m\x1B[3mis using the fork\x1B[0m\n", 0);
+		philo_print (philo, "\x1B[43m\x1B[30m\x1B[3mtakes fork\x1B[0m\n", \
+			0);
 		while (!is_dead(philo))
 			usleep(100);
 		pthread_mutex_unlock(philo->left_fork);
@@ -49,12 +50,12 @@ void *philo_routine(void *args)
 	{
 		while (1)
 		{
-			if(is_dead(philo))
-				break;
+			if (is_dead(philo))
+				break ;
 			philo_eats(philo);
 			philo_sleeps(philo);
 			philo_thinks(philo);
-		}		
+		}
 	}
 	return (NULL);
 }

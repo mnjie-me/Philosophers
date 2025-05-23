@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 13:35:30 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 16:11:49 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:27:29 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	philo_init(t_philo *philo, int ac, char **av)
 	int	*dead;
 
 	i = 0;
-	dead =  malloc(sizeof(int));
+	dead = malloc(sizeof(int));
 	*dead = 0;
 	while (i < atol(av[1]))
 	{
@@ -55,7 +55,7 @@ void	philo_init(t_philo *philo, int ac, char **av)
 		if (ac == 6)
 			philo[i].need_food = atol(av[5]);
 		else
-			philo[i].need_food = -1; // come de forma infinita
+			philo[i].need_food = -1;
 		philo[i].start = time_now();
 		philo[i].last = time_now();
 		i++;

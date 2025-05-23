@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:07:59 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:32:27 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,17 @@ void	final_meals(t_philo *philo, char **av)
 	if (philo->has_eaten && philo->has_eaten == ft_atol(av[5]))
 	{
 		if (philo->has_eaten == 1)
-			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d time\x1B[0m\n\n\n", philo->has_eaten);
+			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d \
+				time\x1B[0m\n\n\n", philo->has_eaten);
 		else
-			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d times\x1B[0m\n\n\n", philo->has_eaten);
+			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d \
+				times\x1B[0m\n\n\n", philo->has_eaten);
 	}
 	else
 		return ;
 }
 
-void ft_free(t_philo *philo, pthread_mutex_t *cutlery, \
+void	ft_free(t_philo *philo, pthread_mutex_t *cutlery, \
 	pthread_mutex_t *death)
 {
 	int	i;
@@ -52,7 +54,6 @@ int	wrong_args(int ac, char **av)
 
 	if (ac != 5 && ac != 6)
 		return (1);
-
 	i = 1;
 	while (i < ac)
 	{
@@ -74,11 +75,10 @@ int	wrong_args(int ac, char **av)
 	return (0);
 }
 
-
-int    main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_philo	*philo;
-    pthread_mutex_t	*cutlery;
+	t_philo			*philo;
+	pthread_mutex_t	*cutlery;
 	pthread_mutex_t	*death;
 
 	if (wrong_args(ac, av))
