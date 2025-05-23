@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:32:27 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:37:10 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	final_meals(t_philo *philo, char **av)
 	if (philo->has_eaten && philo->has_eaten == ft_atol(av[5]))
 	{
 		if (philo->has_eaten == 1)
-			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d \
-				time\x1B[0m\n\n\n", philo->has_eaten);
+			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d time\
+				\x1B[0m\n\n\n", philo->has_eaten);
 		else
-			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d \
-				times\x1B[0m\n\n\n", philo->has_eaten);
+			printf("\x1B[47m\x1B[31m\x1B[1m\nAll Philos ate %d times\
+				\x1B[0m\n\n\n", philo->has_eaten);
 	}
 	else
 		return ;
