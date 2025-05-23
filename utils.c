@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:03:12 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:19:51 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:56:52 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,24 +43,3 @@ long	ft_atol(const char *str)
 	return (num);
 }
 
-int	is_valid(const char *av)
-{
-	int	i;
-
-	i = 0;
-	if (!av || av[0] == '\0')
-		return (0);
-	while (av[i] == ' ' || av[i] == '\t')
-		i++;
-	if (av[i] == '-')
-		return (0);
-	if (av[i] == '+')
-		i++;
-	if (av[i] < '0' || av[i] > '9')
-		return (0);
-	while (av[i] >= '0' && av[i] <= '9')
-		i++;
-	if (av[i] != '\0')
-		return (0);
-	return (1);
-}

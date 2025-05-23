@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:42:44 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/23 19:56:56 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	wrong_args(int ac, char **av)
 			return (1);
 		if (av[i][0] == '0' && av[i][1] != '\0')
 			return (1);
-		if (atol(av[1]) <= 0)
+		if (atol(av[1]) || atol(av[2]) || atol(av[3]) || atol(av[4]) <= 0)
 			return (1);
 		j = 0;
 		while (av[i][j])
@@ -84,11 +84,6 @@ int	main(int ac, char **av)
 	if (wrong_args(ac, av))
 	{
 		write(2, "\x1B[31mError: wrong arguments\x1B[0m\n", 32);
-		return (1);
-	}
-	if (!is_valid(av[1]) || !is_valid(av[2]) || !is_valid(av[3]))
-	{
-		write(2, "\x1B[31mError: wrong argument(s)\x1B[0m\n", 34);
 		return (1);
 	}
 	philo = malloc(sizeof(t_philo) * ft_atol(av[1]));
