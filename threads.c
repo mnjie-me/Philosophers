@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:26:46 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:20:41 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,14 @@ int	is_dead(t_philo *philo)
 		pthread_mutex_unlock(philo->death);
 		return (1);
 	}
-	pthread_mutex_unlock(philo->death);
 	if (time_now() - philo->last > philo->time_die)
 	{
 		*(philo->dead) = 1;
+		pthread_mutex_unlock(philo->death);
 		philo_print(philo, "Philo died\n", 1);
 		return (1);
 	}
+	pthread_mutex_unlock(philo->death);
 	return (0);
 }
 

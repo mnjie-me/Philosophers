@@ -6,14 +6,16 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:56:56 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/05/26 18:19:36 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	final_meals(t_philo *philo, char **av)
+void	final_meals(t_philo *philo, char **av, int ac)
 {
+	if (ac <  6)
+		return ;
 	if (philo->has_eaten && philo->has_eaten == ft_atol(av[5]))
 	{
 		if (philo->has_eaten == 1)
@@ -61,7 +63,8 @@ int	wrong_args(int ac, char **av)
 			return (1);
 		if (av[i][0] == '0' && av[i][1] != '\0')
 			return (1);
-		if (atol(av[1]) || atol(av[2]) || atol(av[3]) || atol(av[4]) <= 0)
+		if (atol(av[1]) <= 0 || atol(av[2]) <= 0 || atol(av[3]) <= 0
+			||atol(av[4]) <= 0)
 			return (1);
 		j = 0;
 		while (av[i][j])
@@ -94,7 +97,18 @@ int	main(int ac, char **av)
 	philo_init(philo, ac, av);
 	mutex_init(philo, cutlery, death);
 	create_threads(philo);
-	final_meals(philo, av);
+	final_meals(philo, av, ac);
 	ft_free(philo, cutlery, death);
 	return (0);
 }
+
+
+  /*   No pruebes con más de 200 filósofos.
+    No pruebes con menos de 60 ms para time_to_die, time_to_eat o time_to_sleep.
+    Prueba con 5 800 200 200. Nadie debería morir.
+    Prueba con 5 800 200 200 7. Nadie debería morir y la simulación debería parar cuando todos los filósofos hayan comido como mínimo 7 veces cada uno.
+    Prueba con 4 410 200 200. Nadie debería morir.
+    Prueba con 4 310 200 100. Un filósofo debería morir.
+    Prueba con 2 filósofos y verifica los distintos tiempos (un retraso en la muerte de más de 10 ms es inaceptable).
+    Prueba con tus valores para verificar todas los requisitos. Comprueba que los filósofos mueren cuando toca, que no roban tenedores, etc.
+ */
