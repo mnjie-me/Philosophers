@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/26 18:20:41 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:14:00 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int	is_dead(t_philo *philo)
 {
-	if (philo->need_food != -1 && philo->has_eaten == philo->need_food)
-		return (1);
+	t_time	now;
+
 	pthread_mutex_lock(philo->death);
+	now = time_now();
 	if (*philo->dead)
 	{
 		pthread_mutex_unlock(philo->death);
 		return (1);
 	}
-	if (time_now() - philo->last > philo->time_die)
+	if (now - philo->last > philo->time_die)
 	{
-		*(philo->dead) = 1;
+		*philo->dead = 1;
 		pthread_mutex_unlock(philo->death);
-		philo_print(philo, "Philo died\n", 1);
+		philo_print(philo, "died\n", 1);
 		return (1);
 	}
 	pthread_mutex_unlock(philo->death);

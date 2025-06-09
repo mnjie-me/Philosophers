@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:03:12 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/26 16:17:05 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:07:23 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,18 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	return (num);
+}
+
+int	philo_waits(t_philo *philo, t_time wait_time)
+{
+	t_time	start_time;
+
+	start_time = time_now();
+	while (time_now() - start_time < wait_time)
+	{
+		if (is_dead(philo))
+			return (1);
+		usleep(500);
+	}
+	return (0);
 }

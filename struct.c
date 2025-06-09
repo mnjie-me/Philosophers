@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 13:35:30 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:27:29 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:13:47 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	mutex_init(t_philo *philo, pthread_mutex_t *cutlery, \
 		philo[i].death = death;
 		i++;
 	}
-	pthread_mutex_init(philo->death, NULL);
+	pthread_mutex_init(death, NULL);
 }
 
 void	philo_init(t_philo *philo, int ac, char **av)

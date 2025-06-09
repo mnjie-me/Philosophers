@@ -2,8 +2,8 @@ NAME = philo
 
 SRC = main.c threads.c struct.c actions.c utils.c
 
-CC = gcc
-CFLAGS = -pthread -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -pthread -Wall -Wextra -Werror -fsanitize=thread
 
 all: $(NAME)
 

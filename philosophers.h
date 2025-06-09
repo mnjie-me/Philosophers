@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:40 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/05/23 19:29:16 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:12:03 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # include <sys/time.h>
 
 typedef unsigned long long	t_time;
+
+typedef struct s_print
+{
+	pthread_mutex_t	print_mutex;
+}	t_print;
 
 typedef struct s_philo
 {
@@ -37,6 +42,8 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*death;
+	pthread_mutex_t	eat_lock;
+	t_print			*print;
 }	t_philo;
 
 void	philo_init(t_philo *philo, int ac, char **av);
