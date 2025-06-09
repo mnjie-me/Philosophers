@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/09 16:41:26 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:42:54 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,3 @@ void	create_threads(t_philo *philo)
 		i++;
 	}
 }
-
-/*   No pruebes con más de 200 filósofos.
-    No pruebes con menos de 60 ms para time_to_die, time_to_eat o time_to_sleep.
-    Prueba con 5 800 200 200. Nadie debería morir.
-    Prueba con 5 800 200 200 7. Nadie debería morir y la simulación debería parar cuando todos los filósofos hayan comido como mínimo 7 veces cada uno.
-    Prueba con 4 410 200 200. Nadie debería morir.
-    Prueba con 4 310 200 100. Un filósofo debería morir.
-    Prueba con 2 filósofos y verifica los distintos tiempos (un retraso en la muerte de más de 10 ms es inaceptable).
-    Prueba con tus valores para verificar todas los requisitos. Comprueba que los filósofos mueren cuando toca, que no roban tenedores, etc.
- */
