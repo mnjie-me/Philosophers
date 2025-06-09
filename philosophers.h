@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:40 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/09 16:12:03 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/04 12:02:59 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	pthread_mutex_t	*death;
-	pthread_mutex_t	eat_lock;
 	t_print			*print;
 }	t_philo;
 

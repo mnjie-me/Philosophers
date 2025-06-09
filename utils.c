@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:03:12 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/09 16:07:23 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/04 11:50:08 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ long	ft_atol(const char *str)
 
 int	philo_waits(t_philo *philo, t_time wait_time)
 {
-	t_time	start_time;
+	t_time	time;
 
-	start_time = time_now();
-	while (time_now() - start_time < wait_time)
+	time = time_now();
+	while (time_now() - time < wait_time)
 	{
 		if (is_dead(philo))
 			return (1);
-		usleep(500);
+		usleep(100);
 	}
 	return (0);
 }

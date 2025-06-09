@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 16:43:02 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/09 16:06:55 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:29:27 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	philo_print(t_philo *philo, char *status, int dead)
 	pthread_mutex_lock(philo->death);
 	if (!*philo->dead)
 	{
-		printf("\x1B[3m\x1B[33m%llu \x1B[0m", (time_now() - philo->start));
+		printf("At \x1B[3m\x1B[33m%llu\x1B[0mms ", (time_now() - philo->start));
 		printf("%d %s\n", philo->id + 1, status);
 	}
 	if (dead)
 	{
 		*philo->dead = 1;
-		printf("\n\x1B[41m\x1B[37m%llu %d died\x1B[0m\n\n\n", \
+		printf("\x1B[41m\x1B[37mAt %llums %d died\x1B[0m\n\n\n", \
 		(time_now() - philo->start), philo->id + 1);
 	}
 	pthread_mutex_unlock(philo->death);
