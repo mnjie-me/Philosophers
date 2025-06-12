@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 12:38:17 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/09 16:42:58 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/12 15:28:09 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	wrong_args(int ac, char **av)
 int	main(int ac, char **av)
 {
 	t_philo			*philo;
-	t_print			print;
 	pthread_mutex_t	*cutlery;
 	pthread_mutex_t	*death;
 
@@ -95,7 +94,6 @@ int	main(int ac, char **av)
 		return (1);
 	philo_init(philo, ac, av);
 	mutex_init(philo, cutlery, death);
-	pthread_mutex_init(&print.print_mutex, NULL);
 	create_threads(philo);
 	final_meals(philo, av, ac);
 	ft_free(philo, cutlery, death);
