@@ -6,7 +6,7 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/21 15:03:12 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/12 17:00:03 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/13 15:08:49 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	philo_waits(t_philo *philo, t_time wait_time)
 	{
 		if (is_dead(philo))
 			return (1);
-		usleep(10);
+		usleep(100);
 	}
 	return (0);
 }
