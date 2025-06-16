@@ -6,11 +6,46 @@
 /*   By: mnjie-me <mnjie-me@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 15:21:31 by mnjie-me          #+#    #+#             */
-/*   Updated: 2025/06/13 15:17:41 by mnjie-me         ###   ########.fr       */
+/*   Updated: 2025/06/16 18:04:03 by mnjie-me         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+void	*monitor_routine(void *arg)
+{
+	t_philo	*philos;
+	int		i;
+
+	philos = (t_philo *)arg;
+	while (1)
+	{
+		i = 0;
+		while (i < philos[0].num_philo)
+		{
+			pthread_mutex_lock(philos[i].death);
+			if (*(philos[i].dead) == 1)
+			{
+				pthread_mutex_unlock(philos[i].death);
+				return (NULL);
+			}
+			pthread_mutex_lock(&philos[i].last_mutex);
+			if (time_now() - philos[i].last >= philos[i].time_die)
+			{
+				*(philos[i].dead) = 1;
+				pthread_mutex_unlock(philos[i].death);
+				pthread_mutex_unlock(&philos[i].last_mutex);
+				philo_print(&philos[i], "died", 1);
+				return (NULL);
+			}
+			pthread_mutex_unlock(&philos[i].last_mutex);
+			pthread_mutex_unlock(philos[i].death);
+			i++;
+		}
+		usleep(1000);
+	}
+	return (NULL);
+}
 
 int	is_dead(t_philo *philo)
 {
@@ -38,6 +73,8 @@ void	*philo_routine(void *args)
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
+	if (philo->num_philo % 2 != 0)
+		usleep(100);
 	if (philo->num_philo == 1 && !is_dead(philo))
 	{
 		pthread_mutex_lock(philo->left_fork);
